@@ -2,7 +2,11 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { UserLocationData } from '../interfaces';
 
-const Navbar = () => {
+interface Props {
+  setSearchQuery: React.Dispatch<React.SetStateAction<string | undefined>>;
+}
+
+const Navbar = ({ setSearchQuery }: Props) => {
   const [userLocationData, setUserLocationData] =
     useState<UserLocationData | null>(null);
   const [lat, setLat] = useState<number | null>(null);
@@ -22,6 +26,7 @@ const Navbar = () => {
   useEffect(() => {
     axios.get(URL).then((res) => {
       setUserLocationData(res.data);
+      setSearchQuery(res.data.location.name);
     });
   }, [URL]);
 
