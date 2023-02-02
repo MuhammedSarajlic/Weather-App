@@ -6,7 +6,7 @@ import { LocationData, CurrentData } from './interfaces';
 function App() {
   const [current, setCurrent] = useState<CurrentData | null>(null);
   const [location, setLocation] = useState<LocationData | null>(null);
-  const [searchQuery, setSearchQuery] = useState<string | undefined>();
+  const [searchQuery, setSearchQuery] = useState<string | undefined>('');
 
   const URL = `http://api.weatherapi.com/v1/current.json?key=${
     import.meta.env.VITE_API_KEY

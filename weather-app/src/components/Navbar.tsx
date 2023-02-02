@@ -12,9 +12,11 @@ const Navbar = ({ setSearchQuery }: Props) => {
   const [lat, setLat] = useState<number | null>(null);
   const [lon, setLon] = useState<number | null>(null);
 
+  let coord = `${lat},${lon}`;
+
   const URL = `http://api.weatherapi.com/v1/current.json?key=${
     import.meta.env.VITE_API_KEY
-  }&q=${lat},${lon}&aqi=no`;
+  }&q=${coord}&aqi=no`;
 
   if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition((res) => {
@@ -37,11 +39,12 @@ const Navbar = ({ setSearchQuery }: Props) => {
           <span className='self-center text-2xl font-bold whitespace-nowrap dark:text-white'>
             Weather App
           </span>
-          <div>
+          <div className='relative rounded-lg overflow-hidden w-72 bg-white'>
             <input
               type='text'
+              onChange={(e) => setSearchQuery(e.target.value)}
               placeholder='Search...'
-              className='min-w-xl bg-white rounded-lg outline-none py-2 px-2 text-black'
+              className='w-full bg-white outline-none py-2 px-2 text-black border-[1px] border-b-black'
             />
           </div>
           <div className='flex items-center font-bold text-lg'>
